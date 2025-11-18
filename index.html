@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>STUDY GROUP FINDER - Science Study Groups Platform</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="app-container">
+        <!-- Header -->
+        <header>
+            <div>
+                <img src="muni logo 2.jpg" alt="logo">
+                <h1>MUNI UNIVERSITY STUDY GROUP FINDER</h1>
+            </div>
+            <nav id="mainNav">
+                <button class="nav-btn" onclick="showView('landing')">Home</button>
+                <button class="nav-btn" id="groupsBtn" style="display:none;" onclick="showView('groups')">Study Groups</button>
+                <button class="nav-btn" id="myGroupBtn" style="display:none;" onclick="showMyGroup()">My Group</button>
+                <button class="nav-btn" id="messagesBtn" style="display:none;" onclick="showView('messages')">Messages</button>
+                <button class="nav-btn" id="adminBtn" style="display:none;" onclick="showView('admin')">Admin Panel</button>
+                <div id="userDisplay" style="display:none;" class="user-info">
+                    <span id="currentUserName"></span>
+                </div>
+                <button class="nav-btn danger" id="logoutBtn" style="display:none;" onclick="logout()">Logout</button>
+            </nav>
+        </header>
+
+        <!-- Landing View -->
+        <div id="landingView" class="view active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h2>MEET OTHER SCHOLARS WITHIN THE UNIVERSITY AND GLOBALLY</h2>
+                    <button class="hero-cta" onclick="showView('studentRegister')">Join as Student</button>
+                    <button class="hero-cta" onclick="showView('studentLogin')">Student Login</button>
+                    <button class="hero-cta" onclick="showView('adminAccess')">Admin Access</button>
+                </div>
+            </div>
+            <!-- Information Section -->
+            <div class="info-section">
+                <h2>THE ACADEMIC LIFELONG LEARNING BEGINS NOW WITH;</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Comprehensive Learning Resources</h3>
+                        <p>Access hundreds of curated textbooks, video lectures, practice problems, and lab manuals across all scientific disciplines.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Collaborative Learning Environment</h3>
+                        <p>Connect with peers, share insights, and solve complex problems together in dedicated study groups.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Academic Excellence</h3>
+                        <p>Our platform is designed to help students achieve higher grades and deeper understanding of scientific concepts.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Global Reach, Local Impact</h3>
+                        <p>While serving students worldwide, we're proud to be based in Arua, Uganda, supporting African scholarship.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Science-Focused</h3>
+                        <p>Specialized platform exclusively for science students with tailored resources and study methodologies.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Innovative Learning Tools</h3>
+                        <p>Interactive simulations, virtual labs, and cutting-edge educational technology to enhance your learning experience.</p>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h3>ABOUT US</h3>
+                    <p>STUDY GROUP FINDER is a premier academic platform dedicated to fostering collaborative learning among students at Muni University and worldwide. Founded by a team of educators and technologists, our mission is to democratize access to quality science education and create vibrant learning communities.</p>
+                    <p>Our platform connects students with similar academic interests, facilitates knowledge sharing, and provides comprehensive learning resources curated by subject matter experts. Whether you're studying physics, chemistry, biology, or any other scientific discipline, STUDY GROUP FINDER offers the tools and community support you need to excel academically.</p>
+                    <p>We believe that collaborative learning enhances understanding, retention, and application of scientific concepts. By bringing together bright minds from diverse backgrounds, we create an environment where innovation thrives and academic goals are achieved.</p>
+                    
+                    <div class="location">
+                        <div class="location-info">
+                            <h4>Our Location</h4>
+                            <p>Muni University Main Campus Arua, Uganda - Proudly serving student at Muni University and beyond</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Developers Section -->
+            <div class="developers-section">
+                <h2>FOR MORE INQURIES;</h2>
+                <div class="developers-grid">
+                    <div class="developer-card">
+                       <div class="developer-name">Ogwal Tonny</div>
+                        <div class="developer-tel">Tel: 0755030556</div>
+                        <div class="developer-email">Email:ogwaltonny88@gmail.com</div>
+                    </div>
+                    <div class="developer-card">
+                        <div class="developer-name">Feku Imran</div>
+                        <div class="developer-tel">Tel: O789244567</div>
+                        <div class="developer-email">Email:fekuimran3@gmail.com</div>
+                    </div>
+                    <div class="developer-card">
+                        <div class="developer-name">Mambo Joseph</div>
+                        <div class="developer-tel">Tel: 0772678688</div>
+                        <div class="developer-email">Email: mambojosh559@gmail.com</div>
+                    </div>
+                    <div class="developer-card">
+                        <div class="developer-name">Aligo Captain</div>
+                        <div class="developer-tel">Tel:0776589356</div>
+                        <div class="developer-email">Email:alighocaptain243@gmail.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Registration -->
+        <div id="studentRegisterView" class="view">
+            <div class="form-container">
+                <h2>Student Registration</h2>
+                <form id="studentForm" onsubmit="event.preventDefault(); registerStudent();">
+                    <div class="form-group">
+                        <label>First Name *</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name *</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password *</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Study Group *</label>
+                        <select id="groupSelect" required>
+                            <option value="">Choose a study group...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Days of Availability *</label>
+                        <div class="days-selector">
+                            <label class="day-checkbox">
+                                <input type="checkbox" name="days" value="Monday"> Monday
+                            </label>
+                            <label class="day-checkbox">
+                                <input type="checkbox" name="days" value="Tuesday"> Tuesday
+                            </label>
+                            <label class="day-checkbox">
+                                <input type="checkbox" name="days" value="Wednesday"> Wednesday
+                            </label>
+                            <label class="day-checkbox">
+                                <input type="checkbox" name="days" value="Thursday"> Thursday
+                            </label>
+                            <label class="day-checkbox">
+                                <input type="checkbox" name="days" value="Friday"> Friday
+                            </label>
+                            <label class="day-checkbox">
+                                <input type="checkbox" name="days" value="Saturday"> Saturday
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Study Time *</label>
+                        <select id="studyTime" required>
+                            <option value="">Choose your preferred time...</option>
+                            <option value="Morning (8 AM - 11 AM)">Morning (8 AM - 11 AM)</option>
+                            <option value="Afternoon (11 AM - 1 PM)">Afternoon (11 AM - 1 PM)</option>
+                            <option value="Evening (2 PM - 5 PM)">Evening (2 PM - 5 PM)</option>
+                            <option value="Evening Preps (7 PM - 9 PM)">Evening Preps (7 PM - 9 PM)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Join Study Group</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Student Login -->
+        <div id="studentLoginView" class="view">
+            <div class="form-container">
+                <h2>Student Login</h2>
+                <form onsubmit="event.preventDefault(); studentLogin();">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="studentEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="studentPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <div class="password-recovery">
+                        <a href="#" onclick="showView('studentPasswordRecovery')">Forgot your password?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Student Password Recovery -->
+        <div id="studentPasswordRecoveryView" class="view">
+            <div class="form-container">
+                <h2>Password Recovery</h2>
+                <form onsubmit="event.preventDefault(); recoverStudentPassword();">
+                    <div class="form-group">
+                        <label>Enter your email address</label>
+                        <input type="email" id="studentRecoveryEmail" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Recover Password</button>
+                    <div class="password-recovery">
+                        <a href="#" onclick="showView('studentLogin')">Back to Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Access -->
+        <div id="adminAccessView" class="view">
+            <div class="form-container">
+                <h2>Admin Access</h2>
+                <div class="admin-options">
+                    <button class="admin-option-btn active" onclick="showAdminOption('login')">Sign In</button>
+                    <button class="admin-option-btn" onclick="showAdminOption('register')">Create Account</button>
+                    <button class="admin-option-btn" onclick="showAdminOption('recovery')">Recover Password</button>
+                </div>
+
+                <!-- Admin Login -->
+                <div id="adminLoginOption" class="admin-option active">
+                    <form onsubmit="event.preventDefault(); adminLogin();">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="adminUser" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="adminPass" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+
+                <!-- Admin Registration -->
+                <div id="adminRegisterOption" class="admin-option">
+                    <form onsubmit="event.preventDefault(); adminRegister();">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="adminName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="adminEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="adminPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" id="adminConfirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Admin Account</button>
+                    </form>
+                </div>
+
+                <!-- Admin Password Recovery -->
+                <div id="adminRecoveryOption" class="admin-option">
+                    <form onsubmit="event.preventDefault(); recoverAdminPassword();">
+                        <div class="form-group">
+                            <label>Enter your email address</label>
+                            <input type="email" id="adminRecoveryEmail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Recover Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Study Groups List -->
+        <div id="groupsView" class="view">
+            <div class="groups-container">
+                <h2>Available Study Groups</h2>
+                <div class="search-box">
+                    <input type="text" id="searchGroups" placeholder="🔍 Search study groups..." oninput="filterGroups()">
+                </div>
+                <div class="groups-grid" id="groupsGrid"></div>
+            </div>
+        </div>
+
+        <!-- Group Details -->
+        <div id="groupDetailView" class="view">
+            <div class="group-details">
+                <button class="back-btn" onclick="showView('groups')">← Back to Groups</button>
+                <div class="group-header">
+                    <div class="group-header-icon" id="detailIcon"></div>
+                    <div class="group-header-info">
+                        <h2 id="detailName"></h2>
+                        <div class="group-header-stats">
+                            <div>
+                                <span class="stat-value" id="detailMembers">0</span>
+                                <div class="stat-label">Members</div>
+                            </div>
+                            <div>
+                                <span class="stat-value" id="detailResources">0</span>
+                                <div class="stat-label">Resources</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('overview')">Overview</button>
+                    <button class="tab" onclick="showTab('members')">Members</button>
+                    <button class="tab" onclick="showTab('resources')">Learning Resources</button>
+                    <button class="tab" id="groupMessagesTab" style="display:none;" onclick="showTab('messages')">Group Messages</button>
+                </div>
+
+                <div id="overviewTab" class="tab-content active">
+                    <h3 style="margin-bottom: 20px;">About This Group</h3>
+                    <p id="detailDescription" style="font-size: 16px; line-height: 1.8; color: var(--gray);"></p>
+                    
+                    <!-- Google Meet Section -->
+                    <div id="meetSection" style="margin-top: 30px; padding: 20px; background: var(--light); border-radius: 15px; display:none;">
+                        <h4 style="margin-bottom: 15px; color: var(--dark);">📹 Group Video Meetings</h4>
+                        <p style="color: var(--gray); margin-bottom: 15px;">Connect with your group members via Google Meet for collaborative study sessions.</p>
+                        <button class="meet-btn" onclick="startGoogleMeet()">
+                            <span class="meet-icon">📹</span>
+                            Start Google Meet
+                        </button>
+                        <button class="meet-btn" onclick="joinExistingMeet()" style="background: linear-gradient(135deg, #34a853, #0f9d58);">
+                            <span class="meet-icon">🔗</span>
+                            Join Existing Meeting
+                        </button>
+                        <div id="activeMeetings" style="margin-top: 20px;"></div>
+                    </div>
+
+                    <button class="btn btn-danger" onclick="leaveGroup()" id="leaveGroupBtn" style="margin-top: 30px; display:none;">Leave Group</button>
+                </div>
+
+                <div id="membersTab" class="tab-content">
+                    <h3 style="margin-bottom: 20px;">Group Members</h3>
+                    <div class="members-grid" id="membersGrid"></div>
+                </div>
+
+                <div id="resourcesTab" class="tab-content">
+                    <h3 style="margin-bottom: 20px;">Learning Resources</h3>
+                    <div class="resources-grid" id="resourcesGrid"></div>
+                </div>
+
+                <div id="messagesTab" class="tab-content">
+                    <h3 style="margin-bottom: 20px;">Group Messages</h3>
+                    <div class="messaging-container">
+                        <div class="chat-area">
+                            <div class="chat-header">
+                                <h4 id="chatGroupName">Group Chat</h4>
+                            </div>
+                            <div class="chat-messages" id="groupChatMessages"></div>
+                            <div class="typing-indicator" id="groupTypingIndicator">Someone is typing...</div>
+                            <div class="chat-input">
+                                <input type="text" id="groupMessageInput" placeholder="Type your message..." onkeypress="handleGroupTyping(event)">
+                                <button onclick="toggleGroupEmojiPicker()" style="background: transparent; color: var(--gray); font-size: 24px;">😊</button>
+                                <button onclick="sendGroupMessage()">Send</button>
+                            </div>
+                            <div class="emoji-picker" id="groupEmojiPicker">
+                                <button class="emoji-btn" onclick="insertGroupEmoji('😊')">😊</button>
+                                <button class="emoji-btn" onclick="insertGroupEmoji('👍')">👍</button>
+                                <button class="emoji-btn" onclick="insertGroupEmoji('❤️')">❤️</button>
+                                <button class="emoji-btn" onclick="insertGroupEmoji('😂')">😂</button>
+                                <button class="emoji-btn" onclick="insertGroupEmoji('🎉')">🎉</button>
+                                <button class="emoji-btn" onclick="insertGroupEmoji('📚')">📚</button>
+                                <button class="emoji-btn" onclick="insertGroupEmoji('✅')">✅</button>
+                                <button class="emoji-btn" onclick="insertGroupEmoji('👏')">👏</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages View -->
+        <div id="messagesView" class="view">
+            <div class="groups-container">
+                <button class="back-btn" onclick="showView('groups')">← Back to Groups</button>
+                <h2>Messages</h2>
+                <div class="messaging-container">
+                    <div class="conversations-list" id="conversationsList"></div>
+                    <div class="chat-area">
+                        <div class="chat-header">
+                            <h4 id="chatUserName">Select a conversation</h4>
+                        </div>
+                        <div class="chat-messages" id="chatMessages"></div>
+                        <div class="typing-indicator" id="typingIndicator">Someone is typing...</div>
+                        <div class="chat-input">
+                            <input type="text" id="messageInput" placeholder="Type your message..." onkeypress="handleTyping(event)">
+                            <button onclick="toggleEmojiPicker()" style="background: transparent; color: var(--gray); font-size: 24px;">😊</button>
+                            <button onclick="sendMessage()">Send</button>
+                        </div>
+                        <div class="emoji-picker" id="emojiPicker">
+                            <button class="emoji-btn" onclick="insertEmoji('😊')">😊</button>
+                            <button class="emoji-btn" onclick="insertEmoji('👍')">👍</button>
+                            <button class="emoji-btn" onclick="insertEmoji('❤️')">❤️</button>
+                            <button class="emoji-btn" onclick="insertEmoji('😂')">😂</button>
+                            <button class="emoji-btn" onclick="insertEmoji('🎉')">🎉</button>
+                            <button class="emoji-btn" onclick="insertEmoji('📚')">📚</button>
+                            <button class="emoji-btn" onclick="insertEmoji('✅')">✅</button>
+                            <button class="emoji-btn" onclick="insertEmoji('👏')">👏</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="adminView" class="view">
+            <div class="groups-container">
+                <button class="back-btn" onclick="showView('landing')">← Back to Home</button>
+                <h2>Admin Dashboard</h2>
+                
+                <div class="admin-stats">
+                    <div class="admin-stat-card">
+                        <h3 id="adminTotalStudents">0</h3>
+                        <p>Total Students</p>
+                    </div>
+                    <div class="admin-stat-card">
+                        <h3 id="adminTotalGroups">20</h3>
+                        <p>Study Groups</p>
+                    </div>
+                    <div class="admin-stat-card">
+                        <h3 id="adminTotalResources">400</h3>
+                        <p>Learning Resources</p>
+                    </div>
+                    <div class="admin-stat-card">
+                        <h3 id="adminAvgMembers">0</h3>
+                        <p>Avg Members/Group</p>
+                    </div>
+                </div>
+
+                <div class="admin-actions">
+                    <button class="admin-action-btn" onclick="showAdminAction('addGroup')">Add Study Group</button>
+                    <button class="admin-action-btn" onclick="showAdminAction('addResource')">Add Resource</button>
+                    <button class="admin-action-btn" onclick="showAdminAction('sendAnnouncement')">Send Announcement</button>
+                    <button class="admin-action-btn" onclick="showAdminAction('addAdmin')">Add Admin</button>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" onclick="showAdminTab('all')">All Students</button>
+                    <button class="tab" onclick="showAdminTab('groups')">Groups Overview</button>
+                    <button class="tab" onclick="showAdminTab('resources')">Manage Resources</button>
+                    <button class="tab" onclick="showAdminTab('messages')">Message Management</button>
+                </div>
+
+                <div id="adminAllTab" class="tab-content active">
+                    <div class="search-box">
+                        <input type="text" id="searchStudents" placeholder="🔍 Search students..." oninput="filterStudents()">
+                    </div>
+                    <div class="members-grid" id="allStudentsGrid"></div>
+                </div>
+
+                <div id="adminGroupsTab" class="tab-content">
+                    <div class="groups-grid" id="adminGroupsGrid"></div>
+                </div>
+
+                <div id="adminResourcesTab" class="tab-content">
+                    <div class="resources-grid" id="adminResourcesGrid"></div>
+                </div>
+
+                <div id="adminMessagesTab" class="tab-content">
+                    <h3 style="margin-bottom: 20px;">Message Management</h3>
+                    <div class="search-box">
+                        <input type="text" id="searchMessages" placeholder="🔍 Search messages..." oninput="filterMessages()">
+                    </div>
+                    <div class="chat-messages" id="adminMessagesList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Action Modals -->
+    <div id="addGroupModal" class="resource-viewer" style="display:none;">
+        <div class="resource-content">
+            <button class="close-resource" onclick="closeAdminAction()">×</button>
+            <h2>Add New Study Group</h2>
+            <div class="form-group">
+                <label>Group Name</label>
+                <input type="text" id="newGroupName">
+            </div>
+            <div class="form-group">
+                <label>Group Icon</label>
+                <select id="newGroupIcon">
+                    <option value="⚛️">Physics</option>
+                    <option value="🧪">Chemistry</option>
+                    <option value="🧬">Biology</option>
+                    <option value="⚗️">Organic Chemistry</option>
+                    <option value="🔭">Astronomy</option>
+                    <option value="🔬">Biochemistry</option>
+                    <option value="🦠">Microbiology</option>
+                    <option value="🫀">Anatomy</option>
+                    <option value="💪">Physiology</option>
+                    <option value="🌱">Ecology</option>
+                    <option value="🌌">Astronomy</option>
+                    <option value="💎">Inorganic Chemistry</option>
+                    <option value="🌡️">Physical Chemistry</option>
+                    <option value="🔗">Molecular Biology</option>
+                    <option value="🌍">Environmental Science</option>
+                    <option value="🧠">Neuroscience</option>
+                    <option value="🛡️">Immunology</option>
+                    <option value="💊">Pharmacology</option>
+                    <option value="🦁">Zoology</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="newGroupDescription"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="addNewGroup()">Add Group</button>
+        </div>
+    </div>
+
+    <div id="addResourceModal" class="resource-viewer" style="display:none;">
+        <div class="resource-content">
+            <button class="close-resource" onclick="closeAdminAction()">×</button>
+            <h2>Add New Resource</h2>
+            <div class="form-group">
+                <label>Resource Title</label>
+                <input type="text" id="newResourceTitle">
+            </div>
+            <div class="form-group">
+                <label>Resource Type</label>
+                <select id="newResourceType">
+                    <option value="📚">Textbook</option>
+                    <option value="🎥">Video</option>
+                    <option value="💻">Simulation</option>
+                    <option value="📝">Practice Problems</option>
+                    <option value="🔬">Lab Manual</option>
+                    <option value="📊">Guide</option>
+                    <option value="⚗️">Reaction Guide</option>
+                    <option value="🔗">Link</option>
+                    <option value="📄">File</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="newResourceDescription"></textarea>
+            </div>
+            <div class="form-group" id="resourceLinkGroup">
+                <label>Resource Link</label>
+                <input type="url" id="newResourceLink" placeholder="https://example.com">
+            </div>
+            <div class="form-group">
+                <label>Select Group</label>
+                <select id="newResourceGroup"></select>
+            </div>
+            <button class="btn btn-primary" onclick="addNewResource()">Add Resource</button>
+        </div>
+    </div>
+
+    <div id="sendAnnouncementModal" class="resource-viewer" style="display:none;">
+        <div class="resource-content">
+            <button class="close-resource" onclick="closeAdminAction()">×</button>
+            <h2>Send Announcement</h2>
+            <div class="form-group">
+                <label>Announcement Title</label>
+                <input type="text" id="announcementTitle">
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea id="announcementMessage"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Send To</label>
+                <select id="announcementTarget">
+                    <option value="all">All Students</option>
+                    <option value="group">Specific Group</option>
+                    <option value="student">Specific Student</option>
+                </select>
+            </div>
+            <div class="form-group" id="announcementGroupSelect" style="display:none;">
+                <label>Select Group</label>
+                <select id="targetGroupSelect"></select>
+            </div>
+            <div class="form-group" id="announcementStudentSelect" style="display:none;">
+                <label>Select Student</label>
+                <select id="targetStudentSelect"></select>
+            </div>
+            <button class="btn btn-primary" onclick="sendAnnouncement()">Send Announcement</button>
+        </div>
+    </div>
+
+    <div id="addAdminModal" class="resource-viewer" style="display:none;">
+        <div class="resource-content">
+            <button class="close-resource" onclick="closeAdminAction()">×</button>
+            <h2>Add New Admin</h2>
+            <div class="form-group">
+                <label>Admin Name</label>
+                <input type="text" id="newAdminName">
+            </div>
+            <div class="form-group">
+                <label>Admin Email</label>
+                <input type="email" id="newAdminEmail">
+            </div>
+            <div class="form-group">
+                <label>Admin Password</label>
+                <input type="password" id="newAdminPassword">
+            </div>
+            <button class="btn btn-primary" onclick="addNewAdmin()">Add Admin</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
